@@ -47,7 +47,9 @@
 
 ### 1. 克隆项目
 
-git clone <your-repo-url>
+```shell
+git clone https://github.com/yuriyoung/tictactoe.git
+```
 
 ### 2. 用 Unity 打开项目
 
