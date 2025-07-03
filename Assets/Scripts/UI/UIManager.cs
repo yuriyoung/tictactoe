@@ -35,18 +35,18 @@ namespace TicTacToe
 
         private void OnNewGameFinished() 
         {
-            // Ö±½ÓÏÔÊ¾O»¹ÊÇXÍæ¼Ò¼´¿É
+            // ç›´æ¥æ˜¾ç¤ºOè¿˜æ˜¯Xç©å®¶å³å¯
             var state = GameManager.Instance.CurrentState;
             if(state.CausedWin /*&& state.Side == GameManager.Instance.StartingSide*/)
             {
                 m_messageBoxIcon.gameObject.SetActive(true);
                 m_messageBoxIcon.sprite = state.Side == Side.Circle ? m_circleTurnIndicator.sprite : m_crossTurnIndicator.sprite;
-                m_mssageBoxText.text = $"{state.Side} Ó®ÁË£¡";
+                m_mssageBoxText.text = $"{state.Side} èµ¢äº†ï¼";
             }
             else
             {
                 m_messageBoxIcon.gameObject.SetActive(false);
-                m_mssageBoxText.text = "Æ½¾Ö£¡";
+                m_mssageBoxText.text = "å¹³å±€ï¼";
             }
             
             m_resultMessageBox.gameObject.SetActive(true);

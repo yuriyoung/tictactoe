@@ -4,14 +4,14 @@ using System.Collections.Generic;
 namespace TicTacToe
 {
     /// <summary>
-    /// TODO: Í³Ò»Òì³£´¦Àí public static class GameExceptions {}
-    /// TODO: ÈÕÖ¾ÏµÍ³ public static class GameLogger
-    /// TODO: ¿ÉĞòÁĞ»¯ÓÎÏ·×´Ì¬
+    /// TODO: ç»Ÿä¸€å¼‚å¸¸å¤„ç† public static class GameExceptions {}
+    /// TODO: æ—¥å¿—ç³»ç»Ÿ public static class GameLogger
+    /// TODO: å¯åºåˆ—åŒ–æ¸¸æˆçŠ¶æ€
     /// </summary>
 
     public class Game
     {
-        // ÓÃÓÚÔÚ½çÃæÏÔÊ¾ÀúÊ·²Ù×÷²½ÖèÒÔ¼°»ÚÆå»ò»ØËİ(Âä×ÓÓĞ»Ú)
+        // ç”¨äºåœ¨ç•Œé¢æ˜¾ç¤ºå†å²æ“ä½œæ­¥éª¤ä»¥åŠæ‚”æ£‹æˆ–å›æº¯(è½å­æœ‰æ‚”)
         public Board CurrentBoard => BoardHistory.Count > 0 ? BoardHistory[^1] : null;
        
         public GameContext CurrentContext => ContextHistory.Count > 0 ? ContextHistory[^1] : GameContext.DefaultContext;
@@ -20,7 +20,7 @@ namespace TicTacToe
 
         public IList<Board> BoardHistory { get; }
         public IList<GameContext> ContextHistory { get; }
-        public IList<Dictionary<Block, Dictionary<Cell, Placement>>> PlacementsHistory { get; } // À©Õ¹ÆäËûÀàĞÍÓÎÏ·Ô¤ÁôµÄ½Ó¿Ú
+        public IList<Dictionary<Block, Dictionary<Cell, Placement>>> PlacementsHistory { get; } // æ‰©å±•å…¶ä»–ç±»å‹æ¸¸æˆé¢„ç•™çš„æ¥å£
         public IList<GameState> GameStates { get; }
 
         public Game() : this(GameContext.DefaultContext, Util.DefaultBlocks)
@@ -40,7 +40,7 @@ namespace TicTacToe
         }
 
         /// <summary>
-        /// ·ÅÖÃÆå×Ó²¢ÇĞ»»ÏÂÒ»¸öÍæ¼ÒµÄ»ØºÏ
+        /// æ”¾ç½®æ£‹å­å¹¶åˆ‡æ¢ä¸‹ä¸€ä¸ªç©å®¶çš„å›åˆ
         /// </summary>
         public bool ExecutePlacement(Placement placement)
         {
@@ -50,28 +50,28 @@ namespace TicTacToe
             Board beforeBoard = BoardHistory[^1];
             GameContext beforeCtx = ContextHistory[^1];
 
-            // ÒÑ¾­·Ö³öÊ¤¸º£¬²»ÔÙ¼ÌĞø·ÅÖÃ²Ù×÷£¬ÕâÀïÎŞĞè¼ì²éÊ¤¸ºÓ¦ÓÉµ÷ÓÃÕß¸ºÔğÓÎÏ·×´Ì¬
+            // å·²ç»åˆ†å‡ºèƒœè´Ÿï¼Œä¸å†ç»§ç»­æ”¾ç½®æ“ä½œï¼Œè¿™é‡Œæ— éœ€æ£€æŸ¥èƒœè´Ÿåº”ç”±è°ƒç”¨è€…è´Ÿè´£æ¸¸æˆçŠ¶æ€
             //if (CurrentState.CausedDraw || CurrentState.CausedWin)
             //{
             //    if(Rules.TestContiguousBlocks(beforeBoard))
             //        return false;
             //}
 
-            // ÂäÆåºó±£´æÀúÊ·ÆåÅÌ
+            // è½æ£‹åä¿å­˜å†å²æ£‹ç›˜
             Board afterBoard = new Board(beforeBoard);
             afterBoard.PlaceBlock(beforeCtx, placement);
             BoardHistory.Add(afterBoard);
             bool wining = Rules.IsContiguousBlocks(placement.Start, afterBoard, beforeCtx.TurnSide);
 
-            // Íêºó½»»»¶ÔÊÖ
+            // å®Œåäº¤æ¢å¯¹æ‰‹
             GameContext afterCtx = beforeCtx.Advance(afterBoard);
             ContextHistory.Add(afterCtx);
 
-            // ¼ì²é¶ÔÊÖÊÇ·ñ¿ÉÂäÆå£¬ÔÚÀ©Õ¹ÆäËûÀàĞÍµÄÓÎÏ·¿ÉÓÃ
+            // æ£€æŸ¥å¯¹æ‰‹æ˜¯å¦å¯è½æ£‹ï¼Œåœ¨æ‰©å±•å…¶ä»–ç±»å‹çš„æ¸¸æˆå¯ç”¨
             //Dictionary<Block, Dictionary<Cell, Placement>> placeables = GetLegalPlacements(afterBoard, afterCtx);
             //PlacementsHistory.Add(placeables);
 
-            // ±£´æµ±Ç°×´Ì¬
+            // ä¿å­˜å½“å‰çŠ¶æ€
             var state = new GameState(cell: placement.Start, side:beforeCtx.TurnSide, block: beforeBoard[placement.Start], placement:placement);
             state.SetGameState(wining, !wining && afterBoard.IsAllCellsOccupied());
             GameStates.Add(state);
@@ -89,7 +89,7 @@ namespace TicTacToe
         public bool GetLegalPlacement(Cell cell, out Placement placement)
         {
             placement = null;
-            // »ñÈ¡ÆåÅÌµÄ×îĞÂ×´Ì¬
+            // è·å–æ£‹ç›˜çš„æœ€æ–°çŠ¶æ€
             if (!cell.IsValid() || BoardHistory[^1].IsOccupied(cell))
                 return false;
 
@@ -100,7 +100,7 @@ namespace TicTacToe
         public bool GetLegalPlacementMove(Cell cell, out Placement placement)
         {
             placement = null;
-            // »ñÈ¡ÆåÅÌµÄ×îĞÂ×´Ì¬
+            // è·å–æ£‹ç›˜çš„æœ€æ–°çŠ¶æ€
             if (!cell.IsValid() || BoardHistory[^1].IsOccupied(cell))
                 return false;
 
@@ -121,7 +121,7 @@ namespace TicTacToe
         }
 
         /// <summary>
-        /// À©Õ¹ÆäËûÀàĞÍÓÎÏ·Ô¤ÁôµÄ½Ó¿Ú
+        /// æ‰©å±•å…¶ä»–ç±»å‹æ¸¸æˆé¢„ç•™çš„æ¥å£
         /// </summary>
         /// <param name="board"></param>
         /// <param name="context"></param>

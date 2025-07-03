@@ -108,11 +108,11 @@ namespace TicTacToe
                         Cell targetPosition = position + offset;
                         while (targetPosition.IsValid())
                         {
-                            // Èç¹ûÄ¿±êÎ»ÖÃ±»Õ¼ÓÃ£¬Ôò¼ÌĞøÏòÇ°²éÕÒ
+                            // å¦‚æœç›®æ ‡ä½ç½®è¢«å ç”¨ï¼Œåˆ™ç»§ç»­å‘å‰æŸ¥æ‰¾
                             if (board.IsOccupied(targetPosition))
                                 break;
 
-                            // TODO: Ê¹ÓÃRules::MoveableTest(...)¼ì²éÊÇ·ñ¿ÉÒÆ¶¯
+                            // TODO: ä½¿ç”¨Rules::MoveableTest(...)æ£€æŸ¥æ˜¯å¦å¯ç§»åŠ¨
                             results.Add(targetPosition, new Placement(targetPosition));
 
                             hasResults = true;

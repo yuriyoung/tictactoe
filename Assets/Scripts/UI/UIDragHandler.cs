@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace TicTacToe
 {
-    // Ã»ÓĞÊ¹ÓÃ£¬Ä¿µÄÊÇ¿ÉÍÏ×§MessageBoxÖ®ÀàµÄ½çÃæ£¬·Àµ²ÆÁÄ»µÄ×÷ÓÃ
+    // æ²¡æœ‰ä½¿ç”¨ï¼Œç›®çš„æ˜¯å¯æ‹–æ‹½MessageBoxä¹‹ç±»çš„ç•Œé¢ï¼Œé˜²æŒ¡å±å¹•çš„ä½œç”¨
     public class UIDragHandler : MonoBehaviour
     {
         private RectTransform m_rectTransform;

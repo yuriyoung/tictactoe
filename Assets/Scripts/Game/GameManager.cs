@@ -6,7 +6,7 @@ using UnityEngine;
 namespace TicTacToe
 {
     /**
-     * @note àÅ£¿c#Ã»ÓĞfinalĞŞÊÎ·û£¿ÓÃsealedÀ´Ìæ´ú¡£
+     * @note å—¯ï¼Ÿc#æ²¡æœ‰finalä¿®é¥°ç¬¦ï¼Ÿç”¨sealedæ¥æ›¿ä»£ã€‚
      **/
     public sealed class GameManager : MonoBehaviourSingleton<GameManager>
     {
@@ -123,7 +123,7 @@ namespace TicTacToe
         private void DoAIExecute(Placement move)
         {
             GameObject thisBlock = BoardManager.Instance.GetBlockAtPosition(move.Start);
-            GameObject to = BoardManager.Instance.GetBlockAtPosition(move.End); // Èç¹ûÓĞ
+            GameObject to = BoardManager.Instance.GetBlockAtPosition(move.End); // å¦‚æœæœ‰
             OnBlockPlacement(move.Start, thisBlock.transform, to?.transform);
         }
 

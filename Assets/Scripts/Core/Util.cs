@@ -24,25 +24,25 @@ namespace TicTacToe
          *  (0, -1),  [origin] (0, 1),
          *  (1, -1), (1, 0),   (1, 1)
          */
-        // ÖÜÎ§µÄ8¸ö¾ØĞÎÎ»ÖÃ
+        // å‘¨å›´çš„8ä¸ªçŸ©å½¢ä½ç½®
         public static readonly Cell[] Surroundings =
         {
-            new(1, 0),  // ÉÏ
-            new(-1, 0), // ÏÂ
-            new(0, -1), // ×ó
-            new(0, 1),  // ÓÒ
-            new(-1, -1),// ×óÉÏ
-            new(-1, 1), // ÓÒÉÏ
-            new(1, -1), // ×óÏÂ
-            new(1, 1)   // ÓÒÏÂ
+            new(1, 0),  // ä¸Š
+            new(-1, 0), // ä¸‹
+            new(0, -1), // å·¦
+            new(0, 1),  // å³
+            new(-1, -1),// å·¦ä¸Š
+            new(-1, 1), // å³ä¸Š
+            new(1, -1), // å·¦ä¸‹
+            new(1, 1)   // å³ä¸‹
         };
 
         public static readonly Cell[] Directions =
         {
-            new (0, 1),  // Ë®Æ½
-            new (1, 0),  // ´¹Ö± 
-            new (1, 1),  // Õı¶Ô½ÇÏß
-            new (1, -1)  // Ğ±¶Ô½ÇÏß
+            new (0, 1),  // æ°´å¹³
+            new (1, 0),  // å‚ç›´ 
+            new (1, 1),  // æ­£å¯¹è§’çº¿
+            new (1, -1)  // æ–œå¯¹è§’çº¿
         };
 
         public static readonly (Cell, Block)[] DefaultBlocks =

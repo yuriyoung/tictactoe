@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 namespace TicTacToe
 {
     /// <summary>
-    /// Ê¹ÓÃ¼«´ó¼«Ğ¡ÖµËã·¨¼ÆËã³ö×î¼ÑÂäÆåÎ»ÖÃ
-    /// ²Î¿¼ÍøÉÏ´ó¶àÊıµÄÊµÏÖ·½·¨
+    /// ä½¿ç”¨æå¤§æå°å€¼ç®—æ³•è®¡ç®—å‡ºæœ€ä½³è½æ£‹ä½ç½®
+    /// å‚è€ƒç½‘ä¸Šå¤§å¤šæ•°çš„å®ç°æ–¹æ³•
     /// </summary>
     public class Minimax
     {
@@ -38,10 +38,10 @@ namespace TicTacToe
                         if (board.IsOccupied(row, col))
                             continue;
 
-                        // Ä£ÄâÂä×Ó
+                        // æ¨¡æ‹Ÿè½å­
                         Board nextBoard = new Board(board);
                         nextBoard.AIAttemptPlace(new Cell(row, col), m_aiSide);
-                        // ½»»»»ØºÏ
+                        // äº¤æ¢å›åˆ
                         float score = this.DoMinimax(nextBoard, m_aiSide.Opponent(), 0, alpha, beta);
 
                         if (score > bestScore)
@@ -57,7 +57,7 @@ namespace TicTacToe
                 return bestPlacement;
             });
 
-            // Ä£ÄâAIË¼¿¼ÑÓ³Ù
+            // æ¨¡æ‹ŸAIæ€è€ƒå»¶è¿Ÿ
             if (delayMs > 0)
                 await Task.Delay(delayMs);
 
@@ -65,7 +65,7 @@ namespace TicTacToe
         }
 
         /// <summary>
-        /// Ê¹ÓÃalpha-beta¼ôÖ¦ÓÅ»¯
+        /// ä½¿ç”¨alpha-betaå‰ªæä¼˜åŒ–
         /// </summary>
         /// <param name="board"></param>
         /// <param name="maximizing"></param>
@@ -79,7 +79,7 @@ namespace TicTacToe
 
             //Debug.Log($"DoMinmax: score[{score}], depth[{depth}], turn[{turnSide}], alpha[{alpha}], beta[{beta}]");
 
-            // ¼«´ó¼«Ğ¡»¯
+            // æå¤§æå°åŒ–
             float bestScore = (turnSide == m_aiSide) ? float.NegativeInfinity : float.PositiveInfinity;
             for (int row = 0; row < Board.Size; row++)
             {
@@ -88,26 +88,26 @@ namespace TicTacToe
                     if (board.IsOccupied(row, col))
                         continue;
 
-                    // ĞÂ½¨¸±±¾Ä£ÄâÂä×Ó
+                    // æ–°å»ºå‰¯æœ¬æ¨¡æ‹Ÿè½å­
                     Board nextBoard = new Board(board);
-                    // ÕâÀïĞè½»»»µ½Ò»·½»ØºÏ
-                    // TODO:ÓĞ´ıÓÅ»¯Board::PlaceBlock½Ó¿Ú
+                    // è¿™é‡Œéœ€äº¤æ¢åˆ°ä¸€æ–¹å›åˆ
+                    // TODO:æœ‰å¾…ä¼˜åŒ–Board::PlaceBlockæ¥å£
                     nextBoard.AIAttemptPlace(new Cell(row, col), turnSide);
-                    //Ò»·½»ñÊ¤»òÆåÅÌÒÑÂúÍË³öµİ¹é
+                    //ä¸€æ–¹è·èƒœæˆ–æ£‹ç›˜å·²æ»¡é€€å‡ºé€’å½’
                     float alphaScore = DoMinimax(nextBoard, turnSide.Opponent(), depth++, alpha, beta);
 
                     if (turnSide == m_aiSide)
                     {
                         bestScore = MathF.Max(bestScore, alphaScore);
                         alpha = MathF.Max(alpha, bestScore);
-                        if (beta <= alpha) // ¼ôÖ¦
+                        if (beta <= alpha) // å‰ªæ
                             return bestScore; 
                     }
                     else
                     {
                         bestScore = MathF.Min(bestScore, alphaScore);
                         beta = MathF.Min(beta, bestScore);
-                        if (beta <= alpha)// ¼ôÖ¦
+                        if (beta <= alpha)// å‰ªæ
                             return bestScore; 
                     }
                 }
@@ -122,10 +122,10 @@ namespace TicTacToe
             bool crossWin = Rules.TestContiguousBlocks(board, Side.Cross);
             bool circleWin = Rules.TestContiguousBlocks(board, Side.Circle);
 
-            // ÀíÂÛÉÏ²»»á³öÏÖÕâÖÖÇé¿ö
+            // ç†è®ºä¸Šä¸ä¼šå‡ºç°è¿™ç§æƒ…å†µ
             if (crossWin && circleWin)
                 return 0;
-            // µ÷ÕûcrossºÍcircleµÄ·ÖÖµÀ´¸Ä±äAI²ßÂÔ
+            // è°ƒæ•´crosså’Œcircleçš„åˆ†å€¼æ¥æ”¹å˜AIç­–ç•¥
             if (crossWin)
                 return m_aiSide == Side.Cross ? m_power: -m_power;
             if (circleWin)
@@ -133,13 +133,13 @@ namespace TicTacToe
             if (full = board.IsAllCellsOccupied())
                 return 0;
 
-            // ·ÀÖ¹ÏÈÊÖÕ¼¾İÈı¸ö¶Ô½ÇÎ»ÖÃ
+            // é˜²æ­¢å…ˆæ‰‹å æ®ä¸‰ä¸ªå¯¹è§’ä½ç½®
             if (!board[1,1].IsOccupied && m_aiSide == turnSide)
             {
                 return -m_power;
             }
 
-            // ¼òµ¥ÓÃÆå×ÓÊı²îÖµÀ´ÆÀ·Ö£¬¿ÉÊ¹ÓÃ¸ü¸´ÔÓµÄËã·¨´¦ÀíµÃ·ÖÊı
+            // ç®€å•ç”¨æ£‹å­æ•°å·®å€¼æ¥è¯„åˆ†ï¼Œå¯ä½¿ç”¨æ›´å¤æ‚çš„ç®—æ³•å¤„ç†å¾—åˆ†æ•°
             int crossCount = 0, circleCount = 0;
             foreach (var block in board.GetBlocks())
             {

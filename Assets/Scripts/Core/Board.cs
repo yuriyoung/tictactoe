@@ -4,7 +4,7 @@ using System.Linq;
 namespace TicTacToe
 {
     /// <summary>
-    /// TODO: 对象池管理Block实例
+    /// TODO: 瀵硅薄姹犵鐞咮lock瀹炰緥
     /// </summary>
     public class Board
     {
@@ -85,9 +85,9 @@ namespace TicTacToe
 
             if (placement.Block != null && placement.Block != blockToPlace)
             {
-                // 目前并没什么用，扩展其他类型游戏可能会有用
-                this[placement.Start] = placement.Block; // 如果指定了不同的块，则替换该位置的块
-                blockToPlace = placement.Block; // 替换新块
+                // 鐩墠骞舵病浠�涔堢敤锛屾墿灞曞叾浠栫被鍨嬫父鎴忓彲鑳戒細鏈夌敤
+                this[placement.Start] = placement.Block; // 濡傛灉鎸囧畾浜嗕笉鍚岀殑鍧楋紝鍒欐浛鎹㈣浣嶇疆鐨勫潡
+                blockToPlace = placement.Block; // 鏇挎崲鏂板潡
             }
             blockToPlace.ApplyPlacement(context, this, placement);
         }

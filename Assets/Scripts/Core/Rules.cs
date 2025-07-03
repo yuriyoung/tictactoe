@@ -42,7 +42,7 @@ namespace TicTacToe
 
         public static bool TestContiguousBlocks(Board board)
         {
-            // ±éÀúÕû¸öÆåÅÌÊÇ·ñ´æÔÚ·ûºÏ3¸öÁ¬Ğø±»Owner(Side.CrossºÍSide.Circle)Õ¼ÓÃµÄÆå×Ó£¬Èç¹ûÓĞÖ±½Ó·µ»Øtrue,·ñÔò·µ»Øfalse
+            // éå†æ•´ä¸ªæ£‹ç›˜æ˜¯å¦å­˜åœ¨ç¬¦åˆ3ä¸ªè¿ç»­è¢«Owner(Side.Crosså’ŒSide.Circle)å ç”¨çš„æ£‹å­ï¼Œå¦‚æœæœ‰ç›´æ¥è¿”å›true,å¦åˆ™è¿”å›false
             int sideCount = 3;
             int size = Board.Size;
 
@@ -59,15 +59,15 @@ namespace TicTacToe
                     if (block == null || !block.IsOccupied) continue;
 
                     int ownerIndex = (int)block.Owner;
-                    // ĞĞ&ÁĞ
+                    // è¡Œ&åˆ—
                     if (++rowCounts[ownerIndex, row] == size) return true;
                     if (++colCounts[ownerIndex, col] == size) return true;
 
-                    // Õı¶Ô½ÇÏß
+                    // æ­£å¯¹è§’çº¿
                     if (row == col)
                         if (++diagCounts[ownerIndex] == size) return true;
 
-                    // Ğ±¶Ô½ÇÏß
+                    // æ–œå¯¹è§’çº¿
                     if (row + col == size - 1)
                         if (++antiDiagCounts[ownerIndex] == size) return true;
                 }
@@ -104,7 +104,7 @@ namespace TicTacToe
 
         public static bool IsDiagonalContiguous(Board board, Side side)
         {
-            // Õı¶Ô½Ç
+            // æ­£å¯¹è§’
             int countMain = 0;
             for (int i = 0; i < Board.Size; i++)
             {
@@ -116,7 +116,7 @@ namespace TicTacToe
             if (countMain >= Board.Size)
                 return true;
 
-            // Ğ±¶Ô½Ç
+            // æ–œå¯¹è§’
             int countAnti = 0;
             for (int i = 0; i < Board.Size; i++)
             {
@@ -130,10 +130,10 @@ namespace TicTacToe
 
         public static bool HasContiguousBlock(Cell start, Cell direction, Board board, Side side)
         {
-            // ÆğÊ¼Î»ÖÃËã1¸ö
+            // èµ·å§‹ä½ç½®ç®—1ä¸ª
             int count = 0;
 
-            // ÏòÇ°¼ì²é
+            // å‘å‰æ£€æŸ¥
             Cell current = start;
             while (current.IsValid() && board[current].Owner == side)
             {
@@ -141,7 +141,7 @@ namespace TicTacToe
                 current += direction;
             }
 
-            // ·´·½Ïò
+            // åæ–¹å‘
             current = start - direction;
             while (current.IsValid() && board[current].Owner == side)
             {
@@ -149,7 +149,7 @@ namespace TicTacToe
                 current -= direction;
             }
 
-            // TODO: ²»ÒªÊ¹ÓÃÆåÅÌµÄ´óĞ¡×÷ÎªÒÀ¾İ
+            // TODO: ä¸è¦ä½¿ç”¨æ£‹ç›˜çš„å¤§å°ä½œä¸ºä¾æ®
             return count >= Board.Size;
         }
 
@@ -176,10 +176,10 @@ namespace TicTacToe
         }
 
         /// <summary>
-        /// ´Óplacement.start¿ªÊ¼ÏòÖÜÎ§8¸ö·½Ïò¼ì²éËùÓĞ¾ßÓĞÏàÍ¬SideµÄCellsÄÜ¹»Á¬³É»ñÊ¤Ìõ¼şµÄÁ´:
-        /// 8¸ö·½ÏòÖ¸µÄÊÇÉÏÏÂ×óÓÒºÍËÄ¸ö¶Ô½ÇÏß·½Ïò£¨ËäÈ»ÊÇ4¸ö·½ÏòÊµ¼ÊÉÏ¼ì²éÁË8¸ö·½Ïò,ÒòÎªÃ¿¸ö·½Ïò¶¼ÊÇË«ÏòµÄ£©
-        /// »ñÊ¤Ìõ¼şÊÇÖ¸ÔÚÄ³¸ö·½ÏòÉÏÓĞÁ¬ĞøµÄ3¸öÏàÍ¬SideµÄCells
-        /// TODO: ÈÃBorad¼ÇÂ¼Á¬³ÉÁ´µÄCells£¬ÒÔ±ãÏòÍæ¼ÒÕ¹Ê¾ÄÄĞ©CellsĞÎ³ÉÁËÁ´£¨ÔÚÓÎÏ·³¡¾°ÖĞÏÔÊ¾Á¬½ÓCellsµÄÌØĞ§£©
+        /// ä»placement.startå¼€å§‹å‘å‘¨å›´8ä¸ªæ–¹å‘æ£€æŸ¥æ‰€æœ‰å…·æœ‰ç›¸åŒSideçš„Cellsèƒ½å¤Ÿè¿æˆè·èƒœæ¡ä»¶çš„é“¾:
+        /// 8ä¸ªæ–¹å‘æŒ‡çš„æ˜¯ä¸Šä¸‹å·¦å³å’Œå››ä¸ªå¯¹è§’çº¿æ–¹å‘ï¼ˆè™½ç„¶æ˜¯4ä¸ªæ–¹å‘å®é™…ä¸Šæ£€æŸ¥äº†8ä¸ªæ–¹å‘,å› ä¸ºæ¯ä¸ªæ–¹å‘éƒ½æ˜¯åŒå‘çš„ï¼‰
+        /// è·èƒœæ¡ä»¶æ˜¯æŒ‡åœ¨æŸä¸ªæ–¹å‘ä¸Šæœ‰è¿ç»­çš„3ä¸ªç›¸åŒSideçš„Cells
+        /// TODO: è®©Boradè®°å½•è¿æˆé“¾çš„Cellsï¼Œä»¥ä¾¿å‘ç©å®¶å±•ç¤ºå“ªäº›Cellså½¢æˆäº†é“¾ï¼ˆåœ¨æ¸¸æˆåœºæ™¯ä¸­æ˜¾ç¤ºè¿æ¥Cellsçš„ç‰¹æ•ˆï¼‰
         /// </summary>
         public static bool IsContiguousBlocks(Cell cellQuestion, Board board, Side friendlySide)
         {

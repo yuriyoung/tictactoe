@@ -9,9 +9,7 @@ namespace TicTacToe
         public readonly int row;
         public readonly int column;
 
-        /// <summary>
-        ///  ��Ч��λ��
-        /// </summary>
+		//无效位置，目前用于未使用的Placement.End属性占位
         public static readonly Cell Invalid = new Cell(-1, -1);
 
         private const int MinBound = 0;
