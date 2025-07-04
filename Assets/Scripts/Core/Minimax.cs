@@ -90,10 +90,10 @@ namespace TicTacToe
 
                     // 新建副本模拟落子
                     Board nextBoard = new Board(board);
-                    // 这里需交换到一方回合
                     // TODO:有待优化Board::PlaceBlock接口
                     nextBoard.AIAttemptPlace(new Cell(row, col), turnSide);
                     //一方获胜或棋盘已满退出递归
+                    // 这里需交换到一方回合
                     float alphaScore = DoMinimax(nextBoard, turnSide.Opponent(), depth++, alpha, beta);
 
                     if (turnSide == m_aiSide)
