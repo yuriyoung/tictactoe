@@ -66,12 +66,18 @@ namespace TicTacToe
 
         private void OnMouseEnter()
         {
-            m_highlight.SetActive(true);
+            if(enabled)
+            {
+                m_highlight.SetActive(true);
+            }
         }
 
         private void OnMouseExit()
         {
-            m_highlight.SetActive(false);
+            if(enabled)
+            {
+                m_highlight.SetActive(false);
+            }
         }
 
     }
